@@ -1,0 +1,27 @@
+.SignUpForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.SignUpForm .login-form h2 {
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* override antd css*/
+.SignUpForm .ant-form {
+  width: 500px;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.15);
+  padding: 10px 20px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.signUp-form-button {
+  float: right;
+  margin-bottom: 5px;
+}
