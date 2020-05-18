@@ -9,6 +9,8 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.2.2",
+    "customize-cra": "^0.9.1",
+    "firebase": "^7.14.4",
     "history": "^4.10.1",
     "lodash": "^4.17.15",
     "proptypes": "^1.1.0",
@@ -16,7 +18,6 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-redux-firebase": "^3.4.0",
-    "customize-cra": "^0.9.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5"
