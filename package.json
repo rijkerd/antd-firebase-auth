@@ -20,7 +20,8 @@
     "react-redux-firebase": "^3.4.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-firestore": "^0.13.0"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
