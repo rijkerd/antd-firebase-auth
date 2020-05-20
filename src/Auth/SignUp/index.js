@@ -1,12 +1,34 @@
 import React from 'react';
-import { Form, Input, Select, Button } from 'antd';
+import PropTypes from 'proptypes';
+import { Form, Input, Select, Button, message } from 'antd';
+import { useFirebase } from 'react-redux-firebase';
 import { Link } from 'react-router-dom';
 
 import './styles.css';
 
-const SignUpForm = () => {
+const SignUpForm = ({ history }) => {
+  const firebase = useFirebase();
+
+  const createUser = async (values) => {
+    const { username, email, password, prefix, phone } = values;
+    try {
+      const phoneNumber = `${prefix}${phone}`;
+      await firebase.createUser(
+        {
+          email,
+          password,
+        },
+        { email, username, phoneNumber }
+      );
+      message.success('User created successfully');
+      history.push('/app');
+    } catch (e) {
+      message.error(`Error creating user ${e.message}`);
+    }
+  };
+
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    createUser(values);
   };
 
   const prefixSelector = (
@@ -15,7 +37,6 @@ const SignUpForm = () => {
         style={{
           width: 80,
         }}
-        defaultValue="255"
       >
         <Select.Option value="255">+255</Select.Option>
         <Select.Option value="254">+254</Select.Option>
@@ -31,17 +52,18 @@ const SignUpForm = () => {
         onFinish={onFinish}
         autoComplete={false}
         layout="vertical"
+        initialValues={{ prefix: '255' }}
       >
         <h2>Create a new Account</h2>
         <Form.Item
-          name="Username"
+          name="username"
           label="Username"
           rules={[{ required: true, message: 'Please input your Username!' }]}
         >
           <Input placeholder="johndoe" />
         </Form.Item>
         <Form.Item
-          name="Email"
+          name="email"
           label="Email"
           rules={[
             { required: true, message: 'Please input your email address!' },
@@ -94,6 +116,10 @@ const SignUpForm = () => {
       </Form>
     </div>
   );
+};
+
+SignUpForm.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };
 
 export default SignUpForm;
