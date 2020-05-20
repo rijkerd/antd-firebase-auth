@@ -1,13 +1,30 @@
-import React from 'react';
-import { Form, Input, Button } from 'antd';
+import React, { useState } from 'react';
+import PropTypes from 'proptypes';
+import { Form, Input, Button, message } from 'antd';
+import { useFirebase } from 'react-redux-firebase';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 import './styles.css';
 
-const SignInForm = () => {
+const SignInForm = ({ history }) => {
+  const [loading, setLoading] = useState(false);
+  const firebase = useFirebase();
+
+  const signInUser = async ({ email, password }) => {
+    try {
+      await firebase.login({ email, password });
+      setLoading(false);
+      history.push('/app');
+    } catch (e) {
+      message.error(e.message);
+      setLoading(false);
+    }
+  };
+
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    setLoading(true);
+    signInUser(values);
   };
 
   return (
@@ -20,7 +37,7 @@ const SignInForm = () => {
       >
         <h2>Sign in to your Account</h2>
         <Form.Item
-          name="Email"
+          name="email"
           rules={[
             { required: true, message: 'Please input your email address!' },
           ]}
@@ -46,6 +63,7 @@ const SignInForm = () => {
             type="primary"
             htmlType="submit"
             className="signIn-form-button"
+            loading={loading}
           >
             Log in
           </Button>
@@ -57,6 +75,10 @@ const SignInForm = () => {
       </Form>
     </div>
   );
+};
+
+SignInForm.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };
 
 export default SignInForm;
