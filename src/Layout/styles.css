@@ -1,0 +1,46 @@
+.BaseLayout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.BaseLayoutHeader {
+  background-color: #fff;
+  box-shadow: 0 2px 2px #ceced194;
+  z-index: 1;
+}
+
+.BaseLayoutSlider {
+  background-color: #0d0d0d;
+}
+
+.BaseLayoutHeader .Breadcrumb {
+  font-size: 18px;
+}
+
+.BaseLayoutContent {
+  background-color: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .ant-layout-header {
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .ant-layout-header {
+    padding: 0 20px;
+  }
+
+  .BaseLayoutHeader .Breadcrumb {
+    font-size: 14px;
+  }
+
+  .ant-dropdown-menu-item {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
