@@ -8,8 +8,10 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import SignInForm from './Auth/SignIn';
 import SignUpForm from './Auth/SignUp';
 import PasswordResetForm from './Auth/PasswordReset';
+import BaseLayout from './Layout/index';
 
 import { store, rrfProps } from './Store/index';
+import { AuthIsLoaded, SecureRoute } from './utils/index';
 /* configure global spin indicator */
 Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} spin />);
 
@@ -20,13 +22,16 @@ const App = () => {
     <Provider store={store}>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <ReactReduxFirebaseProvider {...rrfProps}>
-        <HashRouter hashType="hashbang" history={history}>
-          <Switch>
-            <Route exact path="/" component={SignInForm} />
-            <Route exact path="/signup" component={SignUpForm} />
-            <Route path="/passwordreset" component={PasswordResetForm} />
-          </Switch>
-        </HashRouter>
+        <AuthIsLoaded>
+          <HashRouter hashType="hashbang" history={history}>
+            <Switch>
+              <Route exact path="/" component={SignInForm} />
+              <Route exact path="/signup" component={SignUpForm} />
+              <Route path="/passwordreset" component={PasswordResetForm} />
+              <SecureRoute path="/app" Component={BaseLayout} />
+            </Switch>
+          </HashRouter>
+        </AuthIsLoaded>
       </ReactReduxFirebaseProvider>
     </Provider>
   );
