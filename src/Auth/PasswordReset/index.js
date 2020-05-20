@@ -1,12 +1,28 @@
-import React from 'react';
-import { Input, Form, Button } from 'antd';
+import React, { useState } from 'react';
+import PropTypes from 'proptypes';
+import { Input, Form, Button, message } from 'antd';
+import { useFirebase } from 'react-redux-firebase';
 import { Link } from 'react-router-dom';
 
 import './styles.css';
 
-const PasswordReset = () => {
+const PasswordReset = ({ history }) => {
+  const firebase = useFirebase();
+  const [loading, setLoading] = useState(false);
+  const resetEmail = async ({ email }) => {
+    try {
+      await firebase.resetPassword(email);
+      history.push('/');
+    } catch (e) {
+      message.error(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    setLoading(true);
+    resetEmail(values);
   };
 
   return (
@@ -20,7 +36,7 @@ const PasswordReset = () => {
       >
         <h3>Reset your Password</h3>
         <Form.Item
-          name="Email"
+          name="email"
           label="Email"
           rules={[
             { required: true, message: 'Please input your email address!' },
@@ -33,6 +49,7 @@ const PasswordReset = () => {
             type="primary"
             htmlType="submit"
             className="passwordReset-form-button"
+            loading={loading}
           >
             Send Reset Email
           </Button>
@@ -44,6 +61,10 @@ const PasswordReset = () => {
       </Form>
     </div>
   );
+};
+
+PasswordReset.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };
 
 export default PasswordReset;
