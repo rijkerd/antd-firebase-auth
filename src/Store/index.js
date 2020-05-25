@@ -1,29 +1,31 @@
 import firebase from 'firebase/app';
 import { createStore, combineReducers } from 'redux';
 import { firebaseReducer } from 'react-redux-firebase';
+import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 const fbConfig = {
-  apiKey: 'AIzaSyCzlBUefIqVEkCgPKjj7K6ebfvUwSfTtdg',
-  authDomain: 'timoapp-ecc2f.firebaseapp.com',
-  databaseURL: 'https://timoapp-ecc2f.firebaseio.com',
-  projectId: 'timoapp-ecc2f',
-  storageBucket: 'timoapp-ecc2f.appspot.com',
-  messagingSenderId: '1089801171929',
-  appId: '1:1089801171929:web:7106b417dd6b4f1f295fc8',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 const rrfConfig = {
   userProfile: 'users',
-  // useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
-  // enableClaims: true // Get custom claims along with the profile
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
 };
 
 firebase.initializeApp(fbConfig);
 
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
-  // firestore: firestoreReducer // <- needed if using firestore
+  firestore: firestoreReducer,
 });
 
 const initialState = {};
@@ -40,5 +42,5 @@ export const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
-  // createFirestoreInstance // <- needed if using firestore
+  createFirestoreInstance,
 };
