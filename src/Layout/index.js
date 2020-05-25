@@ -9,15 +9,18 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const BaseLayout = ({ history }) => {
   const firebase = useFirebase();
+
   const logOut = async () => {
     await firebase.logout();
     history.push('/');
   };
+
   const onClickMenu = ({ key }) => {
     if (key === '1') {
       logOut();
     }
   };
+
   return (
     <Layout className="BaseLayout">
       <Header className="BaseLayoutHeader">
@@ -27,11 +30,11 @@ const BaseLayout = ({ history }) => {
           </Menu.Item>
         </Menu>
       </Header>
-      <Layout>
+      <Layout className="BaseLayoutWhiteBg">
         <Sider className="BaseLayoutSlider">Sider</Sider>
         <Content className="BaseLayoutContent">Content</Content>
       </Layout>
-      <Footer>Footer</Footer>
+      <Footer className="BaseLayoutFooter">Footer</Footer>
     </Layout>
   );
 };

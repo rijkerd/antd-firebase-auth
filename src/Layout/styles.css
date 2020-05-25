@@ -2,6 +2,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #fff;
 }
 
 .BaseLayoutHeader {
@@ -11,11 +12,24 @@
 }
 
 .BaseLayoutSlider {
-  background-color: #0d0d0d;
+  background-color: #fff;
+  z-index: 1;
+  box-shadow: 0 2px 2px #ceced194;
+}
+
+.BaseLayoutWhiteBg {
+  background-color: #fff;
 }
 
 .BaseLayoutHeader .Breadcrumb {
   font-size: 18px;
+}
+
+.BaseLayoutFooter {
+  background-color: #fff;
+  z-index: 1;
+  box-shadow: 0 2px 2px #ceced194;
+  text-align: center;
 }
 
 .BaseLayoutContent {
