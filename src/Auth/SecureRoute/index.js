@@ -1,24 +1,10 @@
 import React from 'react';
 import PropTypes from 'proptypes';
 import { useSelector } from 'react-redux';
-import { isLoaded, isEmpty } from 'react-redux-firebase';
 import { Route, Redirect } from 'react-router-dom';
-import { Spin } from 'antd';
+import { isLoaded, isEmpty } from 'react-redux-firebase';
 
-import './styles.css';
-
-export const AuthIsLoaded = ({ children }) => {
-  const auth = useSelector((state) => state.firebase.auth);
-  if (!isLoaded(auth))
-    return (
-      <div className="example">
-        <Spin tip="Loading" />
-      </div>
-    );
-  return children;
-};
-
-export const SecureRoute = ({ Component, ...rest }) => {
+const SecureRoute = ({ Component, ...rest }) => {
   const auth = useSelector((state) => state.firebase.auth);
   return (
     <Route
@@ -48,3 +34,5 @@ SecureRoute.propTypes = {
     PropTypes.node,
   ]).isRequired,
 };
+
+export default SecureRoute;

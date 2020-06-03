@@ -11,7 +11,9 @@ import PasswordResetForm from './Auth/PasswordReset';
 import BaseLayout from './Layout/index';
 
 import { store, rrfProps } from './Store/index';
-import { AuthIsLoaded, SecureRoute } from './utils/index';
+import AuthIsLoaded from './Auth/AuthIsLoaded';
+import SecureRoute from './Auth/SecureRoute';
+
 /* configure global spin indicator */
 Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} spin />);
 
