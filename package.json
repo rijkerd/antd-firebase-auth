@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.2.2",
     "customize-cra": "^0.9.1",
-    "firebase": "^7.14.4",
+    "firebase": "^10.9.0",
     "history": "^4.10.1",
     "lodash": "^4.17.15",
     "proptypes": "^1.1.0",
